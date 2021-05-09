@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+</head>
+<style>
+    .dark{
+        background: black;
+        color:white;
+        transition: all 0.5s linear;
+    }
+    .dark2{
+        background: black;
+        color:white;
+        transition: all 0.5s linear;
+    }
+
+    .wrapper{
+        background: hsl(0, 0%, 98%);
+    }
+    .fontito{
+        font-family: 'Nunito Sans', sans-serif;
+    }
+    .topper{
+        background: hsl(0, 0%, 100%);
+    }
+</style>
+<body id="budy" class="bg-gray-200 fontito">
+
+    <section class="wrapper">
+
+        <div class="border topper">
+            <div class="w-11/12 flex justify-between mx-auto py-4">
+                <p class="text-2xl font-bold">Where in the world</p>
+
+                <div id="nmode" class="flex cursor-pointer items-center gap-4">
+                    <i class="far fa-moon"></i>
+                    <p  class=" font-bold">Dark Mode</p>
+                </div>
+            </div>
+        </div> 
+
+        <div class="w-11/12 mx-auto">
+
+                <div id="output" class="grid grid-cols-4 text-sm"> </div>
+           
+            
+        </div>
+    </section>
+
+
+</body>
+<script>
+   
+
+</script>
+<script>
+
+
+    document.addEventListener('DOMContentLoaded',function() {
+
+        fetch('https://restcountries.eu/rest/v2/all')
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data) {
+            console.log(data);
+
+            let output = "";
+            data.forEach(function(all){
+                output += `
+                <div class="counts py-2 px-2 rounded ">
+                    <img class="rounded-t w-60 h-48" src="${all.flag}">
+
+                    <div class="bg-white px-3 py-3 rounded-b">
+                            <h1 class="font-bold text-lg pt-3 pb-5"> ${all.name}</h1>
+                            <h3><span class="font-bold">Population:</span> ${all.population}</h3>
+                            <h1><span class="font-bold">Region:</span> ${all.region}</h1>
+                            <h1><span class="font-bold">Capital:</span> ${all.capital}</h1>
+                    </div>
+                </div>
+                
+                
+                `
+            })
+            document.getElementById('output').innerHTML = output;
+       
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    });
+
+
+
+
+    const budy = document.getElementById('budy');
+    const counts = document.querySelector('.counts');
+
+    document.getElementById('nmode').addEventListener('click', function(){
+       
+        budy.classList.toggle('dark');
+        counts.classList.toggle('dark2');
+    })
+
+
+
+</script>
+</html>
