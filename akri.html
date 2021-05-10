@@ -14,29 +14,39 @@
     .dark{
         background-color:hsl(207, 26%, 17%);
         color:hsl(0, 0%, 100%);
-        transition: all 0.5s linear;
+        transition: all 0.3s linear;
     }
-    .dark2{
+    .darklo{
         background-color:hsl(209, 23%, 22%);
         color:hsl(0, 0%, 100%);
-        transition: all 0.5s linear;
+        transition: all 0.3s linear;
     }
-
-    .wrapper{
+    .darkloi{
+        background-color:hsl(209, 23%, 22%);
+        color:hsl(0, 0%, 100%);
+        transition: all 0.3s linear;
+    }
+    .darkie{
+        background:hsl(209, 23%, 22%);
+        color:hsl(0, 0%, 100%);
+        transition: all 0.3s linear;
+    }
+    /* .wrapper{
         background: hsl(0, 0%, 98%);
-    }
+    } */
     .fontito{
         font-family: 'Nunito Sans', sans-serif;
     }
-    .topper{
+    /* .topper{
         background: hsl(0, 0%, 100%);
-    }
+    } */
+   
 </style>
-<body id="wrapper" class="budy fontito">
+<body class="budy bg-gray-200 fontito">
 
     <section class="">
 
-        <div class="border topper shadow">
+        <div class="topper shadow">
             <div class="w-11/12 flex justify-between mx-auto py-4">
                 <p class="text-2xl font-bold">Where in the world</p>
 
@@ -66,9 +76,12 @@
 <script>
 
 
-    document.addEventListener('DOMContentLoaded',function() {
+const filter = document.getElementById('filter').addEventListener('keyup', filterTasks)
+   //filter tasks
+    function filterTasks(e) {
 
-        fetch('https://restcountries.eu/rest/v2/all')
+        const text = e.target.value.toLowerCase()
+    fetch(`https://restcountries.eu/rest/v2/region/Africa`)
         .then(function(res) {
             return res.json();
         })
@@ -78,7 +91,7 @@
             let output = "";
             data.forEach(function(all){
                 output += `
-                <div class="counts contili w-8/12 mx-auto shadow rounded mb-12">
+                <div class="wavybox w-8/12 mx-auto shadow rounded mb-12">
                     <img class="rounded-t mx-auto h-40" src="${all.flag}">
 
                     <div class="topper  px-3 py-3 rounded-b">
@@ -98,41 +111,30 @@
         .catch(function(err){
             console.log(err);
         });
-    });
+    };
 
 
-    // const filter = document.getElementById('filter').addEventListener('keyup', searchCountry);
-
-    // function searchCountry(e) {
-
-    //     const text = e.target.value.toLowerCase();
-        
-    //     document.querySelectorAll('contili').forEach(function(namie){
-
-    //         const item = namie.firstChild.textContent
-
-    //         console.log(item)
-
-    //         fetch(`https://restcountries.eu/rest/v2/name/${text}`)
-    //         .then(function(res) {
-    //             return res.json();
-        
-    //         })
-    //             .then(function(data) {
-    //             console.log(data);
-    //         });
-    //     })
-    // }
-
-
+    const wavybox = document.querySelector('.wavybox');
     const budy = document.querySelector('.budy');
-    const counts = document.querySelector('.counts');
-
+    const toppe = document.querySelector('.topper');
+    // const wavyb = document.querySelector('.wavybox');
     document.getElementById('nmode').addEventListener('click', function(){
        
         budy.classList.toggle('dark');
-        // counts.classList.toggle('dark2');
+       toppe.classList.toggle('darklo');
+       wavyb.classList.toggle('darkloi');
+        // document.getElementById('nmode').innerText = 'Light Mode'
+        wavybox.classList.toggle('darkie');
     })
+
+
+
+   
+       
+        
+  
+
+
 
 
 
