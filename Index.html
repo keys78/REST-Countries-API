@@ -36,7 +36,7 @@
 
     <section class="wrapper">
 
-        <div class="border topper">
+        <div class="border topper shadow">
             <div class="w-11/12 flex justify-between mx-auto py-4">
                 <p class="text-2xl font-bold">Where in the world</p>
 
@@ -49,7 +49,9 @@
 
         <div class="w-11/12 mx-auto">
 
-                <div id="output" class="grid grid-cols-4 text-sm"> </div>
+                <input id="filter" type="search" class=" mt-10 border shadow focus:outline-none py-2 px-2 xl:w-3/12 lg:lg-w-4/12 md:w-5/12  topper rounded">
+
+                <div id="output" class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-sm mt-12"> </div>
            
             
         </div>
@@ -76,10 +78,10 @@
             let output = "";
             data.forEach(function(all){
                 output += `
-                <div class="counts py-2 px-2 rounded ">
-                    <img class="rounded-t w-60 h-48" src="${all.flag}">
+                <div class="counts contili w-8/12 mx-auto shadow rounded mb-12">
+                    <img class="rounded-t mx-auto h-40" src="${all.flag}">
 
-                    <div class="bg-white px-3 py-3 rounded-b">
+                    <div class="topper  px-3 py-3 rounded-b">
                             <h1 class="font-bold text-lg pt-3 pb-5"> ${all.name}</h1>
                             <h3><span class="font-bold">Population:</span> ${all.population}</h3>
                             <h1><span class="font-bold">Region:</span> ${all.region}</h1>
@@ -99,6 +101,28 @@
     });
 
 
+    const filter = document.getElementById('filter').addEventListener('keyup', searchCountry);
+
+    function searchCountry(e) {
+
+        const text = e.target.value.toLowerCase();
+        
+        document.querySelectorAll('contili').forEach(function(namie){
+
+            const item = namie.firstChild.textContent
+
+            console.log(item)
+
+            fetch(`https://restcountries.eu/rest/v2/name/${text}`)
+            .then(function(res) {
+                return res.json();
+        
+            })
+                .then(function(data) {
+                console.log(data);
+            });
+        })
+    }
 
 
     const budy = document.getElementById('budy');
