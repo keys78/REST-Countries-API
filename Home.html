@@ -5,12 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 </head>
 <style>
+    #panel{
+        display: none;
+    }
     .dark{
         background-color:hsl(207, 26%, 17%);
         color:hsl(0, 0%, 100%);
@@ -39,8 +42,8 @@
     }
     /* .topper{
         background: hsl(0, 0%, 100%);
-    } */
-   
+    }
+    */
 </style>
 <body class="budy bg-gray-200 fontito">
 
@@ -58,16 +61,33 @@
         </div> 
 
         <div class="w-11/12 mx-auto">
-                <div class="flex justify-between items-center">
-                    <input id="filter" type="search" class=" mt-10 border shadow focus:outline-none py-2 px-2 xl:w-3/12 lg:lg-w-4/12 md:w-5/12  topper rounded">
-                    <div id="region-filter" type="search" class=" mt-10 border shadow focus:outline-none py-2 px-2 xl:w-3/12 lg:lg-w-4/12 md:w-5/12  topper rounded">
-                        Search by region
+                <div class="flex justify-between sm:flex-row flex-col items-start mt-10">
+
+                    <div class="flex justify-between items-center bg-white gap-4 px-5 xl:w-3/12 lg:lg-w-4/12 md:w-5/12 shadow border  topper rounded">
+                        <i class="fas fa-search"></i>
+                        <input id="filter" type="text" class=" focus:outline-none py-2 w-full" placeholder="Search for a country">
+                    </div>
+
+                        <div class="">
+                            <div id="flip" type="search" class="cursor-pointer w-full border gap-4 shadow font-medium bg-white py-2 px-2 topper rounded flex justify-between sm:mt-0 mt-5 items-center px-14 sm:px-16">
+                                <div >Filter by region</div>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div id="panel" type="search" class=" border shadow font-medium bg-white py-2 px-2   topper rounded">
+                                <h1 id="alli" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm text-black cursor-pointer">Back to All</h1>
+                                <h1 id="africa" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm text-black cursor-pointer">Africa</h1>
+                                <h1 id="america" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm cursor-pointer">America</h1>
+                                <h1 id="asia" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm text-black cursor-pointer">Asia</h1>
+                                <h1 id="europe" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm text-black cursor-pointer">Europe</h1>
+                                <h1 id="oceania" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm text-black cursor-pointer">Oceania</h1>
+                            </div>
                         </div>
+                       
 
                 </div>
-                <div id="otput" class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-sm mt-12"> </div>
-                <div id="output" class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-sm mt-12"> </div>
-           
+
+                <div id="otput" class="sm:pt-32 pt-12"> </div>          
+                <div id="output" class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-sm sm:mt-12 mt-4"> </div>          
             
         </div>
     </section>
@@ -81,7 +101,7 @@
 <script>
 
 
-    document.addEventListener('DOMContentLoaded',function() {
+    document.addEventListener('DOMContentLoaded', function() {
 
         fetch('https://restcountries.eu/rest/v2/all')
         .then(function(res) {
@@ -93,8 +113,8 @@
             let output = "";
             data.forEach(function(all){
                 output += `
-                <div class="wavybox w-8/12 mx-auto shadow rounded mb-12">
-                    <img class="rounded-t mx-auto h-40" src="${all.flag}">
+                <div id="mero" class="cursor-pointer wavybox sm:w-8/12 w-11/12 mx-auto shadow rounded mb-12">
+                    <img class="rounded-t mx-auto w-full sm:h-40 h-60" src="${all.flag}">
 
                     <div class="topper  px-3 py-3 rounded-b">
                             <h1 class="font-bold text-lg pt-3 pb-5"> ${all.name}</h1>
@@ -106,7 +126,7 @@
                 
                 
                 `
-            })
+            })  
             document.getElementById('output').innerHTML = output;
        
         })
@@ -132,11 +152,74 @@
 
 
     const filter = document.getElementById('filter').addEventListener('keyup', filterTasks)
-   //filter tasks
     function filterTasks(e) {
-
+        
         const text = e.target.value.toLowerCase()
+
+        if(text === ""){
+            document.getElementById('otput').style.display = "none"
+        } else {
+            document.getElementById('otput').style.display = "block"
+        }
+
+
     fetch(`https://restcountries.eu/rest/v2/name/${text}`)
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data) {
+            console.log(data);
+
+            let output = "";
+            data.forEach(function(all){
+                output += `
+                <div class="shadow h-screen rounded mb-12 flex md:flex-row flex-col justify-between items-start">
+
+                    <div class="w-3/12">
+                        <img class="rounded-t" src="${all.flag}">
+                    </div>
+
+                    <div class="w-8/12 px-3 py-3 rounded-b">
+
+
+                         <div class="flex justify-around items-start">
+                            <div class="">
+                            <h1 class="font-bold text-2xl pt-3 pb-5"> ${all.name}</h1>
+                            <h1> <span class="font-bold">Native name:</span> ${all.nativeName}</h1>
+                            <h3><span class="font-bold py-1">Population:</span> ${all.population}</h3>
+                            <h1><span class="font-bold">Region:</span> ${all.region}</h1>
+                            <h1><span class="font-bold py-1">Capital:</span> ${all.capital}</h1>
+                            <h1><span class="font-bold">Border Countries:</span> <span class="border py-2 shadow">${all.borders}</span></h1>
+                            </div>
+
+                            <div>
+                                <h1><span class="font-bold">Top Level Domain:</span> ${all.topLevelDomain}</h1>
+                                <h1><span class="font-bold py-1">Currencies:</span> ${all.currencies[0].code}</h1>
+                                <h1><span class="font-bold">Languages:</span> ${all.languages[0].iso639_1}</h1>
+                            </div>
+                         </div>
+
+                    </div>
+
+                </div>
+                
+                
+                `
+               
+            })
+            document.getElementById('otput').innerHTML = output;
+       
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    };
+
+
+    const africlick = document.getElementById('africa').addEventListener('click', getAfrica)
+    function getAfrica(e) {
+
+        fetch(`https://restcountries.eu/rest/v2/region/Africa`)
         .then(function(res) {
             return res.json();
         })
@@ -157,6 +240,184 @@
                     </div>
                 </div>
                 
+                `
+            })
+            document.getElementById('output').innerHTML = output;
+       
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    };
+
+//america
+    const americlick = document.getElementById('america').addEventListener('click', getAmerica)
+    function getAmerica(e) {
+
+        fetch(`https://restcountries.eu/rest/v2/region/Americas`)
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data) {
+            console.log(data);
+
+            let output = "";
+            data.forEach(function(all){
+                output += `
+                <div class="wavybox w-8/12 mx-auto shadow rounded mb-12">
+                    <img class="rounded-t mx-auto h-40" src="${all.flag}">
+
+                    <div class="topper  px-3 py-3 rounded-b">
+                            <h1 class="font-bold text-lg pt-3 pb-5"> ${all.name}</h1>
+                            <h3><span class="font-bold">Population:</span> ${all.population}</h3>
+                            <h1><span class="font-bold">Region:</span> ${all.region}</h1>
+                            <h1><span class="font-bold">Capital:</span> ${all.capital}</h1>
+                    </div>
+                </div>
+                
+                `
+            })
+            document.getElementById('output').innerHTML = output;
+       
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    };
+
+
+//asia
+    document.getElementById('asia').addEventListener('click', getAsia)
+    function getAsia(e) {
+
+        fetch(`https://restcountries.eu/rest/v2/region/Asia`)
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data) {
+            console.log(data);
+
+            let output = "";
+            data.forEach(function(all){
+                output += `
+                <div class="wavybox w-8/12 mx-auto shadow rounded mb-12">
+                    <img class="rounded-t mx-auto h-40" src="${all.flag}">
+
+                    <div class="topper  px-3 py-3 rounded-b">
+                            <h1 class="font-bold text-lg pt-3 pb-5"> ${all.name}</h1>
+                            <h3><span class="font-bold">Population:</span> ${all.population}</h3>
+                            <h1><span class="font-bold">Region:</span> ${all.region}</h1>
+                            <h1><span class="font-bold">Capital:</span> ${all.capital}</h1>
+                    </div>
+                </div>
+                
+                `
+            })
+            document.getElementById('output').innerHTML = output;
+       
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    };
+
+
+//europe
+    document.getElementById('europe').addEventListener('click', getEurope)
+    function getEurope(e) {
+
+        fetch(`https://restcountries.eu/rest/v2/region/Europe`)
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data) {
+            console.log(data);
+
+            let output = "";
+            data.forEach(function(all){
+                output += `
+                <div class="wavybox w-8/12 mx-auto shadow rounded mb-12">
+                    <img class="rounded-t mx-auto h-40" src="${all.flag}">
+
+                    <div class="topper  px-3 py-3 rounded-b">
+                            <h1 class="font-bold text-lg pt-3 pb-5"> ${all.name}</h1>
+                            <h3><span class="font-bold">Population:</span> ${all.population}</h3>
+                            <h1><span class="font-bold">Region:</span> ${all.region}</h1>
+                            <h1><span class="font-bold">Capital:</span> ${all.capital}</h1>
+                    </div>
+                </div>
+                
+                `
+            })
+            document.getElementById('output').innerHTML = output;
+       
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    };
+
+
+//oceania
+    document.getElementById('oceania').addEventListener('click', getOceania)
+    function getOceania(e) {
+
+        fetch(`https://restcountries.eu/rest/v2/region/Oceania`)
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data) {
+            console.log(data);
+
+            let output = "";
+            data.forEach(function(all){
+                output += `
+                <div class="wavybox w-8/12 mx-auto shadow rounded mb-12">
+                    <img class="rounded-t mx-auto h-40" src="${all.flag}">
+
+                    <div class="topper  px-3 py-3 rounded-b">
+                            <h1 class="font-bold text-lg pt-3 pb-5"> ${all.name}</h1>
+                            <h3><span class="font-bold">Population:</span> ${all.population}</h3>
+                            <h1><span class="font-bold">Region:</span> ${all.region}</h1>
+                            <h1><span class="font-bold">Capital:</span> ${all.capital}</h1>
+                    </div>
+                </div>
+                
+                `
+            })
+            document.getElementById('output').innerHTML = output;
+       
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    };
+
+
+//all
+    document.getElementById('alli').addEventListener('click', getAll)
+    function getAll(e) {
+
+        fetch(`https://restcountries.eu/rest/v2/all`)
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data) {
+            console.log(data);
+
+            let output = "";
+            data.forEach(function(all){
+                output += `
+                <div class="wavybox w-8/12 mx-auto shadow rounded mb-12">
+                    <img class="rounded-t mx-auto h-40" src="${all.flag}">
+
+                    <div class="topper  px-3 py-3 rounded-b">
+                            <h1 class="font-bold text-lg pt-3 pb-5"> ${all.name}</h1>
+                            <h3><span class="font-bold">Population:</span> ${all.population}</h3>
+                            <h1><span class="font-bold">Region:</span> ${all.region}</h1>
+                            <h1><span class="font-bold">Capital:</span> ${all.capital}</h1>
+                    </div>
+                </div>
                 
                 `
             })
@@ -177,5 +438,11 @@
 
 
 
+       $(document).ready(function(){
+     $("#flip").click(function(){
+      $("#panel").slideToggle("slow");
+     });
+     });
+            
 </script>
 </html>
