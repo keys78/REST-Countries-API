@@ -14,48 +14,36 @@
     #panel{
         display: none;
     }
+    .elemento{
+        background: hsl(209, 23%, 22%);
+        color:hsl(0, 0%, 100%);
+        transition: all 0.3s linear;
+    }
     .dark{
         background-color:hsl(207, 26%, 17%);
         color:hsl(0, 0%, 100%);
         transition: all 0.3s linear;
     }
-    .darklo{
-        background-color:hsl(209, 23%, 22%);
-        color:hsl(0, 0%, 100%);
-        transition: all 0.3s linear;
-    }
-    .darkloi{
-        background-color:hsl(209, 23%, 22%);
-        color:hsl(0, 0%, 100%);
-        transition: all 0.3s linear;
-    }
-    .darkie{
-        background:hsl(209, 23%, 22%);
-        color:hsl(0, 0%, 100%);
-        transition: all 0.3s linear;
-    }
-    /* .wrapper{
-        background: hsl(0, 0%, 98%);
-    } */
     .fontito{
         font-family: 'Nunito Sans', sans-serif;
     }
-    /* .topper{
-        background: hsl(0, 0%, 100%);
+   
+
+    .budy{
+        transition: all linear 0.4s;
     }
-    */
 </style>
-<body class="budy bg-gray-200 fontito">
+<body class="budy  fontito">
 
     <section class="">
 
         <div class="topper shadow">
             <div class="w-11/12 flex justify-between mx-auto py-4">
-                <p class="text-2xl font-bold">Where in the world</p>
+                <p class="sm:text-2xl text-lg font-bold">Where in the world</p>
 
                 <div id="nmode" class="flex cursor-pointer items-center gap-4">
                     <i class="far fa-moon"></i>
-                    <p  class=" font-bold">Dark Mode</p>
+                    <p  class=" font-bold sm:text-base text-sm">Dark Mode</p>
                 </div>
             </div>
         </div> 
@@ -63,20 +51,20 @@
         <div class="w-11/12 mx-auto">
                 <div class="flex justify-between sm:flex-row flex-col items-start mt-10">
 
-                    <div class="flex justify-between items-center bg-white gap-4 px-5 xl:w-3/12 lg:lg-w-4/12 md:w-5/12 shadow border  topper rounded">
+                    <div id="searchio" class="flex justify-between items-center bg-white gap-4 px-5 xl:w-3/12 lg:lg-w-4/12 md:w-5/12 shadow  topper rounded">
                         <i class="fas fa-search"></i>
-                        <input id="filter" type="text" class=" focus:outline-none py-2 w-full" placeholder="Search for a country">
+                        <input id="filter" type="text" class="bodus focus:outline-none py-2 w-full" placeholder="Search for a country">
                     </div>
 
                         <div class="">
-                            <div id="flip" type="search" class="cursor-pointer w-full border gap-4 shadow font-medium bg-white py-2 px-2 topper rounded flex justify-between sm:mt-0 mt-5 items-center px-14 sm:px-16">
+                            <div id="flip" type="search" class="cursor-pointer w-full gap-4 shadow font-medium bg-white py-2 px-2 rounded flex justify-between sm:mt-0 mt-5 items-center px-14 sm:px-16">
                                 <div >Filter by region</div>
                                 <i class="fas fa-chevron-down"></i>
                             </div>
-                            <div id="panel" type="search" class=" border shadow font-medium bg-white py-2 px-2   topper rounded">
+                            <div id="panel" type="search" class="shadow font-medium bg-white py-2 px-2 rounded">
                                 <h1 id="alli" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm text-black cursor-pointer">Back to All</h1>
                                 <h1 id="africa" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm text-black cursor-pointer">Africa</h1>
-                                <h1 id="america" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm cursor-pointer">America</h1>
+                                <h1 id="america" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm text-black cursor-pointer">America</h1>
                                 <h1 id="asia" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm text-black cursor-pointer">Asia</h1>
                                 <h1 id="europe" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm text-black cursor-pointer">Europe</h1>
                                 <h1 id="oceania" class="hover:bg-gray-200 focus:bg-gray-200 py-1 sm:text-base text-sm text-black cursor-pointer">Oceania</h1>
@@ -86,8 +74,8 @@
 
                 </div>
 
-                <div id="otput" class="sm:pt-32 pt-12"> </div>          
-                <div id="output" class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-sm sm:mt-12 mt-4"> </div>          
+                <div id="otput" class="sm:pt-28 pt-12"> </div>          
+                <div id="output" class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 text-sm sm:mt-8 mt-4"> </div>          
             
         </div>
     </section>
@@ -112,8 +100,9 @@
 
             let output = "";
             data.forEach(function(all){
+                
                 output += `
-                <div id="mero" class="cursor-pointer wavybox sm:w-8/12 w-11/12 mx-auto shadow rounded mb-12">
+                <div class="mero cursor-pointer wavybox sm:w-8/12 w-11/12 mx-auto shadow rounded mb-12">
                     <img class="rounded-t mx-auto w-full sm:h-40 h-60" src="${all.flag}">
 
                     <div class="topper  px-3 py-3 rounded-b">
@@ -126,6 +115,7 @@
                 
                 
                 `
+                
             })  
             document.getElementById('output').innerHTML = output;
        
@@ -136,19 +126,37 @@
     });
 
 
-    const wavybox = document.querySelector('.wavybox');
     const budy = document.querySelector('.budy');
-    const toppe = document.querySelector('.topper');
-    // const wavyb = document.querySelector('.wavybox');
-    document.getElementById('nmode').addEventListener('click', function(){
+    const flpo = document.getElementById('flip');
+    const panelo = document.getElementById('panel');
+    const serafin = document.getElementById('searchio');
+    
+    const bodu = document.querySelector('.bodus');
+    document.getElementById('nmode').addEventListener('click', function(e){
        
         budy.classList.toggle('dark');
-       toppe.classList.toggle('darklo');
-       wavyb.classList.toggle('darkloi');
-        // document.getElementById('nmode').innerText = 'Light Mode'
-        wavybox.classList.toggle('darkie');
+        flpo.classList.toggle('elemento');
+        panelo.classList.toggle('elemento');
+        serafin.classList.toggle('elemento');
+        bodu.classList.toggle('elemento');
+     
+       
+        if(e.target.textContent == 'Dark Mode'){ 
+        e.target.textContent = 'Light Time' 
+        }else e.target.textContent = 'Dark Mode';
+
+        changioColor();
+        wavyboxyie();
+      
+        // 
     })
 
+        function changioColor() {
+            const meroy = document.querySelectorAll('.mero');
+            meroy.forEach(function(coli){
+                coli.classList.toggle('elemento')
+            })
+        }
 
 
     const filter = document.getElementById('filter').addEventListener('keyup', filterTasks)
@@ -158,8 +166,10 @@
 
         if(text === ""){
             document.getElementById('otput').style.display = "none"
+            // document.getElementById('output').style.display = "block"
         } else {
             document.getElementById('otput').style.display = "block"
+            // document.getElementById('output').style.display = "none"
         }
 
 
@@ -173,13 +183,13 @@
             let output = "";
             data.forEach(function(all){
                 output += `
-                <div class="shadow h-screen rounded mb-12 flex md:flex-row flex-col justify-between items-start">
+                <div class="shadow md:h-screen h-auto rounded mb-12 flex md:flex-row flex-col justify-between items-start">
 
-                    <div class="w-3/12">
+                    <div class="md:w-3/12 w-full">
                         <img class="rounded-t" src="${all.flag}">
                     </div>
 
-                    <div class="w-8/12 px-3 py-3 rounded-b">
+                    <div class="md:w-8/12 w-full px-3 py-3 rounded-b">
 
 
                          <div class="flex justify-around items-start">
@@ -188,11 +198,11 @@
                             <h1> <span class="font-bold">Native name:</span> ${all.nativeName}</h1>
                             <h3><span class="font-bold py-1">Population:</span> ${all.population}</h3>
                             <h1><span class="font-bold">Region:</span> ${all.region}</h1>
-                            <h1><span class="font-bold py-1">Capital:</span> ${all.capital}</h1>
+                            <h1><span class="font-bold py-1 px-2">Capital:</span> ${all.capital}</h1>
                             <h1><span class="font-bold">Border Countries:</span> <span class="border py-2 shadow">${all.borders}</span></h1>
                             </div>
 
-                            <div>
+                            <div class="md:mt-0 mt-16">
                                 <h1><span class="font-bold">Top Level Domain:</span> ${all.topLevelDomain}</h1>
                                 <h1><span class="font-bold py-1">Currencies:</span> ${all.currencies[0].code}</h1>
                                 <h1><span class="font-bold">Languages:</span> ${all.languages[0].iso639_1}</h1>
@@ -440,7 +450,7 @@
 
        $(document).ready(function(){
      $("#flip").click(function(){
-      $("#panel").slideToggle("slow");
+      $("#panel").slideToggle("fast");
      });
      });
             
