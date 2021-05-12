@@ -146,9 +146,7 @@
         }else e.target.textContent = 'Dark Mode';
 
         changioColor();
-        wavyboxyie();
-      
-        // 
+   
     })
 
         function changioColor() {
@@ -196,15 +194,15 @@
                             <div class="">
                             <h1 class="font-bold text-2xl pt-3 pb-5"> ${all.name}</h1>
                             <h1> <span class="font-bold">Native name:</span> ${all.nativeName}</h1>
-                            <h3><span class="font-bold py-1">Population:</span> ${all.population}</h3>
+                            <h3><span class="font-bold py-2">Population:</span> ${all.population}</h3>
                             <h1><span class="font-bold">Region:</span> ${all.region}</h1>
-                            <h1><span class="font-bold py-1 px-2">Capital:</span> ${all.capital}</h1>
-                            <h1><span class="font-bold">Border Countries:</span> <span class="border py-2 shadow">${all.borders}</span></h1>
+                            <h1><span class="font-bold py-2">Capital:</span> ${all.capital}</h1>
+                            <h1><span class="font-bold mt-2 ">Border Countries:</span> <span class="border py-2 px-2 mt-2 shadow">${all.borders}</span></h1>
                             </div>
 
                             <div class="md:mt-0 mt-16">
                                 <h1><span class="font-bold">Top Level Domain:</span> ${all.topLevelDomain}</h1>
-                                <h1><span class="font-bold py-1">Currencies:</span> ${all.currencies[0].code}</h1>
+                                <h1><span class="font-bold py-2">Currencies:</span> ${all.currencies[0].code}</h1>
                                 <h1><span class="font-bold">Languages:</span> ${all.languages[0].iso639_1}</h1>
                             </div>
                          </div>
